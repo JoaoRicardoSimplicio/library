@@ -38,7 +38,6 @@ postgres_data/
 
 # Environment variables
 .env
-.env.*
 
 # Docker files
 *.pid
@@ -116,3 +115,4 @@ pnpm-debug.log*
 *.bak
 *.tmp
 *.orig
+.tool-versions
