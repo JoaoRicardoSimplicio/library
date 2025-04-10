@@ -24,10 +24,10 @@ class BookSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data: Dict[str, Any]) -> Book:
         authors_names: List[str] = validated_data.pop('authors_names', None)
+        book: Book = Book.objects.create(**validated_data)
         if authors_names:
-            book: Book = Book.objects.create(**validated_data)
             authors: List[Book] = [Author.objects.get_or_create(name=name)[0] for name in authors_names]
-        book.authors.set(authors)
+            book.authors.set(authors)
         return book
 
     def update(self, instance: Book, validated_data: Dict[str, Any]) -> Book:
