@@ -1,10 +1,12 @@
 import pytest
+from unittest.mock import ANY, patch
 
 from django.urls import reverse
 from rest_framework.test import APIClient
 
 from books.models import Author, Book
 from books.tests.fixtures import AuthorFactory, BookFactory
+from books.seeds import OPEN_LIBRARY_BOOK_DATA
 
 
 @pytest.fixture
@@ -177,6 +179,52 @@ class TestBookViewSet:
         assert 204 == response.status_code
         assert 0 == Book.objects.count()
         assert 1 == Author.objects.count()
+
+    @patch('books.services.requests.get')
+    def test_ingest_book_data_by_isbn(self, mock_requests_get, api_client):
+        isbn = '978-0132931755'
+        _isbn = f'ISBN:{isbn}'
+
+        mock_response = {_isbn: OPEN_LIBRARY_BOOK_DATA.get(f'ISBN:{isbn}')}
+        mock_requests_get.return_value.status_code = 200
+        mock_requests_get.return_value.json.return_value = mock_response
+
+        expected_data = {
+            'id': ANY,
+            'title': 'Working Effectively with Legacy Code',
+            'isbn': '978-0132931755',
+            'authors': [
+                {'id': ANY, 'name': 'Michael C. Feathers'}
+            ],
+            'published_at': '2004-01-01',
+            'description': None
+        }
+
+        url = reverse('book-ingest')
+
+        payload = {'isbn': isbn}
+
+        response = api_client.post(url, data=payload)
+
+        assert 201 == response.status_code
+        assert expected_data == response.json()
+        assert 1 == Book.objects.count()
+        assert 1 == Author.objects.count()
+        mock_requests_get.assert_called_once()
+
+    @patch('books.services.requests.get')
+    def test_ingest_book_data_by_isbn_error_when_isbn_not_provided(self, mock_requests_get, api_client):
+        url = reverse('book-ingest')
+
+        payload = {}
+
+        response = api_client.post(url, data=payload)
+
+        assert 400 == response.status_code
+        assert {'detail': 'ISBN must be provided.'} == response.json()
+        assert 0 == Book.objects.count()
+        assert 0 == Author.objects.count()
+        mock_requests_get.assert_not_called()
 
 
 @pytest.mark.django_db
