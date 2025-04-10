@@ -1,8 +1,14 @@
-from django.http import HttpResponse
-from django.views import View
+from rest_framework import viewsets
+
+from books.models import Author, Book
+from books.serializers import AuthorSerializer, BookSerializer
 
 
-class BookView(View):
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
-    def get(self, request, *args, **kwargs):
-        return HttpResponse("Hello, World!")
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
