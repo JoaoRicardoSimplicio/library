@@ -1,4 +1,16 @@
-OPEN_LIBRARY_BOOK_DATA = {
+import time
+import sys
+
+from django.core.management.base import OutputWrapper
+
+from books.serializers import BookSerializer
+from books.services import get_book_data_by_isbn, parse_book_data
+
+stdout = OutputWrapper(sys.stdout)
+stderr = OutputWrapper(sys.stderr)
+
+
+OPEN_LIBRARY_BOOK_LOCAL_DATA = {
     "ISBN:1931498717": {
         "bib_key": "ISBN:1931498717",
         "info_url": "https://openlibrary.org/books/OL34424821M/Don't_Think_of_an_Elephant!",
@@ -308,5 +320,279 @@ OPEN_LIBRARY_BOOK_DATA = {
                 "value": "2025-04-03T11:56:54.929482"
             }
         }
+    },
+    "ISBN:9781538742570": {
+        "bib_key": "ISBN:9781538742570",
+        "info_url": "https://openlibrary.org/books/OL49368011M/The_Housemaid",
+        "preview": "noview",
+        "preview_url": "https://openlibrary.org/books/OL49368011M/The_Housemaid",
+        "thumbnail_url": "https://covers.openlibrary.org/b/id/14653835-S.jpg",
+        "details": {
+            "works": [{"key": "/works/OL27729743W"}],
+            "title": "The Housemaid",
+            "publishers": ["Hatchette UK - Bookouture"],
+            "publish_date": "April 26 2022",
+            "key": "/books/OL49368011M",
+            "type": {"key": "/type/edition"},
+            "identifiers": {"amazon": ["B09XRF2SWN"]},
+            "isbn_10": ["1538742578"],
+            "classifications": {},
+            "physical_dimensions": "7.95 x .85 x 5.2 inches",
+            "weight": "11 ounces",
+            "copyright_date": "April 26, 2022",
+            "physical_format": "Both paperback and audible audio",
+            "number_of_pages": 336,
+            "first_sentence": {
+                "type": "/type/text",
+                "value": "If I leave this house, it will be in handcuffs.",
+            },
+            "publish_places": ["Grand Central Publishing"],
+            "pagination": "336",
+            "series": ["Housemaid Series"],
+            "covers": [14653835],
+            "latest_revision": 4,
+            "revision": 4,
+            "created": {
+                "type": "/type/datetime",
+                "value": "2023-09-09T02:13:17.299886",
+            },
+            "last_modified": {
+                "type": "/type/datetime",
+                "value": "2025-01-20T02:00:31.047673",
+            },
+        },
+    },
+    "ISBN:9780735211292": {
+        "bib_key": "ISBN:9780735211292",
+        "info_url": "https://openlibrary.org/books/OL32336498M/Atomic_Habits",
+        "preview": "noview",
+        "preview_url": "https://openlibrary.org/books/OL32336498M/Atomic_Habits",
+        "thumbnail_url": "https://covers.openlibrary.org/b/id/12886417-S.jpg",
+        "details": {
+            "works": [{"key": "/works/OL17930368W"}],
+            "title": "Atomic Habits",
+            "publishers": ["Avery, an Imprint of Penguin Random House LLC"],
+            "publish_date": "2018",
+            "key": "/books/OL32336498M",
+            "type": {"key": "/type/edition"},
+            "identifiers": {
+                "learnawesome": ["bc60faf0-a9b8-45f8-8ddb-d9179e6d3dd4"],
+                "amazon": ["B09YTXNR2H"],
+                "wikidata": ["Q98178602"],
+                "goodreads": ["62221762"],
+            },
+            "classifications": {},
+            "languages": [{"key": "/languages/eng"}],
+            "covers": [12886417, -1],
+            "physical_dimensions": "9 x 6 x  inches",
+            "publish_places": ["New York"],
+            "subtitle": "Tiny Changes, Remarkable Results : An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+            "description": {
+                "type": "/type/text",
+                "value": "Learn how to make time for new habits (even when life gets crazy); overcome a lack of motivation and willpower; design your environment to make success easier; get back on track when you fall off course; ...and much more. Atomic Habits will reshape the way you think about progress and success, and give you the tools and strategies you need to transform your habits--whether you are a team looking to win a championship, an organization hoping to redefine an industry, or simply an individual who wishes to quit smoking, lose weight, reduce stress, or achieve any other goal.",
+            },
+            "physical_format": "Hardcover",
+            "number_of_pages": 320,
+            "copyright_date": "2018",
+            "isbn_10": ["0735211299"],
+            "isbn_13": ["9780735211292"],
+            "oclc_numbers": ["11165649274"],
+            "dewey_decimal_class": ["155.24"],
+            "lc_classifications": ["BF335"],
+            "source_records": ["idb:9780735211292"],
+            "latest_revision": 72,
+            "revision": 72,
+            "created": {
+                "type": "/type/datetime",
+                "value": "2021-05-07T07:10:49.427087",
+            },
+            "last_modified": {
+                "type": "/type/datetime",
+                "value": "2023-12-19T23:35:08.329132",
+            },
+        },
+    },
+    "ISBN:9781649377371": {
+        "bib_key": "ISBN:9781649377371",
+        "info_url": "https://openlibrary.org/books/OL53388405M/Untitled",
+        "preview": "noview",
+        "preview_url": "https://openlibrary.org/books/OL53388405M/Untitled",
+        "details": {
+            "type": {
+                "key": "/type/edition"
+            },
+            "authors": [
+                {
+                    "key": "/authors/OL2625980A",
+                    "name": "TBD"
+                }
+            ],
+            "isbn_13": ["9781649377371"],
+            "languages": [
+                {
+                    "key": "/languages/eng"
+                }
+            ],
+            "publish_date": "2024",
+            "publishers": ["Entangled Publishing, LLC"],
+            "source_records": ["bwb:9781649377371"],
+            "title": "Untitled",
+            "weight": "0.700",
+            "full_title": "Untitled",
+            "works": [
+                {
+                    "key": "/works/OL39213216W"
+                }
+            ],
+            "key": "/books/OL53388405M",
+            "latest_revision": 1,
+            "revision": 1,
+            "created": {
+                "type": "/type/datetime",
+                "value": "2024-08-18T04:47:24.418860"
+            },
+            "last_modified": {
+                "type": "/type/datetime",
+                "value": "2024-08-18T04:47:24.418860"
+            }
+        }
+    },
+    "ISBN:9781070527710": {
+        "bib_key": "ISBN:9781070527710",
+        "info_url": "https://openlibrary.org/books/OL37456817M/Dad_I_Want_to_Hear_Your_Story",
+        "preview": "noview",
+        "preview_url": "https://openlibrary.org/books/OL37456817M/Dad_I_Want_to_Hear_Your_Story",
+        "details": {
+            "type": {
+                "key": "/type/edition"
+            },
+            "authors": [
+                {
+                    "key": "/authors/OL7963517A",
+                    "name": "Jeffrey Mason"
+                }
+            ],
+            "isbn_13": ["9781070527710"],
+            "languages": [
+                {
+                    "key": "/languages/eng"
+                }
+            ],
+            "pagination": "104",
+            "publish_date": "2019",
+            "publishers": ["Independently Published"],
+            "source_records": [
+                "bwb:9781070527710",
+                "promise:bwb_daily_pallets_2023-12-08:P9-BPP-581"
+            ],
+            "title": "Dad, I Want to Hear Your Story",
+            "weight": "0.209",
+            "subtitle": "A Father's Guided Journal to Share His Life and His Love",
+            "full_title": "Dad, I Want to Hear Your Story A Father's Guided Journal to Share His Life and His Love",
+            "works": [
+                {
+                    "key": "/works/OL26911723W"
+                }
+            ],
+            "key": "/books/OL37456817M",
+            "local_id": ["urn:bwbsku:P9-BPP-581"],
+            "latest_revision": 2,
+            "revision": 2,
+            "created": {
+                "type": "/type/datetime",
+                "value": "2022-03-01T23:01:55.729115"
+            },
+            "last_modified": {
+                "type": "/type/datetime",
+                "value": "2023-12-10T01:06:22.784418"
+            }
+        }
     }
 }
+
+
+ISBNs = [
+    "9780060934347",  # Don Quixote
+    "9780141439600",  # A Tale of Two Cities
+    "9780544003415",  # The Lord of the Rings
+    "9780156012195",  # The Little Prince
+    "9780747532699",  # Harry Potter and the Philosopher’s Stone
+    "9780062073488",  # And Then There Were None
+    "9780140442939",  # Dream of the Red Chamber
+    "9780547928227",  # The Hobbit
+    "9780140437638",  # She: A History of Adventure
+    "9780064471046",  # The Lion, the Witch and the Wardrobe
+    "9780307474278",  # The Da Vinci Code
+    "9780439064873",  # Harry Potter and the Chamber of Secrets
+    "9780316769488",  # The Catcher in the Rye
+    "9780061122415",  # The Alchemist
+    "9780446516525",  # The Bridges of Madison County
+    "9780060883287",  # One Hundred Years of Solitude
+    "9780679723165",  # Lolita
+    "9780141322568",  # Heidi
+    "9780671734206",  # The Common Sense Book of Baby and Child Care
+    "9780553213133",  # Anne of Green Gables
+    "9780141321035",  # Black Beauty
+    "9780156001311",  # The Name of the Rose
+    "9780425177181",  # The Eagle Has Landed
+    "9780743277709",  # Watership Down
+    "9780440153849",  # The Hite Report
+    "9780064400558",  # Charlotte's Web
+    "9780802144669",  # The Ginger Man
+    "9780310337508",  # The Purpose Driven Life
+    "9780385504225",  # The Lost Symbol
+    "9780439023481",  # The Hunger Games
+    "9780140374247",  # James and the Giant Peach
+    "9780399144462",  # Who Moved My Cheese?
+    "9780553380163",  # A Brief History of Time
+    "9782010008526",  # Paul et Virginie
+    "9780452262492",  # Lust for Life
+    "9780143039099",  # The Wind in the Willows
+    "9780743269513",  # The 7 Habits of Highly Effective People
+    "9784770020676",  # Totto-Chan: The Little Girl at the Window
+    "9780446671002",  # The Celestine Prophecy
+    "9780140120837",  # Perfume
+    "9780143039433",  # The Grapes of Wrath
+    "9780143034902",  # The Shadow of the Wind
+    "9780395927205",  # Interpreter of Maladies
+]
+
+
+def seeds_online_data():
+    for isbn in ISBNs:
+        try:
+            stdout.write(f'ISBN {isbn}: Requesting book details')
+            book_data = get_book_data_by_isbn(isbn=isbn)
+            book_serializer = BookSerializer(data=book_data)
+            if not book_serializer.is_valid():
+                stdout.write(f'ISBN {isbn}: Was not saved')
+                continue
+
+            stdout.write(f'ISBN {isbn}: Saving book')
+            book_serializer.save()
+            stdout.write(f'ISBN {isbn}: Was saved')
+        except Exception as e:
+            stderr.write(f'ISBN {isbn}: An error {str(e)} occurred when seeding book')
+            continue
+        time.sleep(2)
+
+
+def seeds_local_data():
+    for isbn, book in OPEN_LIBRARY_BOOK_LOCAL_DATA.items():
+        stdout.write(f'ISBN {isbn}: Start parsing book data')
+        try:
+            stdout.write(f'ISBN {isbn}: Getting book details')
+            book_data = book['details']
+            book_serializer = BookSerializer(
+                data=parse_book_data(isbn=isbn.split(':')[1], book_data=book_data)
+            )
+            if not book_serializer.is_valid():
+                stdout.write(f'ISBN {isbn}: Was not saved')
+                continue
+
+            stdout.write(f'ISBN {isbn}: Saving book')
+            book_serializer.save()
+            stdout.write(f'ISBN {isbn}: Was saved')
+        except Exception as e:
+            stderr.write(f'ISBN {isbn}: An error {str(e)} occurred when seeding book')
+            continue

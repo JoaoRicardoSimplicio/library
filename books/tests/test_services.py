@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from books.seeds import OPEN_LIBRARY_BOOK_DATA
+from books.seeds import OPEN_LIBRARY_BOOK_LOCAL_DATA
 from books.services import get_book_data_by_isbn
 
 
@@ -13,7 +13,7 @@ class TestBookServices:
     def test_get_book_data_by_isbn(self, mock_requests_get):
         isbn = '978-0143130727'
         _isbn = f'ISBN:{isbn}'
-        mock_response = {_isbn: OPEN_LIBRARY_BOOK_DATA.get(f'ISBN:{isbn}')}
+        mock_response = {_isbn: OPEN_LIBRARY_BOOK_LOCAL_DATA.get(f'ISBN:{isbn}')}
 
         mock_requests_get.return_value.status_code = 200
         mock_requests_get.return_value.json.return_value = mock_response
@@ -40,7 +40,7 @@ class TestBookServices:
     def test_get_book_data_by_isbn_cached(self, mock_requests_get):
         isbn = '1931498717'
         _isbn = f'ISBN:{isbn}'
-        mock_response = {_isbn: OPEN_LIBRARY_BOOK_DATA.get(f'ISBN:{isbn}')}
+        mock_response = {_isbn: OPEN_LIBRARY_BOOK_LOCAL_DATA.get(f'ISBN:{isbn}')}
 
         mock_requests_get.return_value.status_code = 200
         mock_requests_get.return_value.json.return_value = mock_response
