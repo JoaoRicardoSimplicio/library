@@ -30,6 +30,9 @@ def get_book_data_by_isbn(isbn: str) -> Dict[str, Any]:
         params=params
     )
 
-    book_data = response.json()[isbn_value]['details']
+    try:
+        book_data = response.json()[isbn_value]['details']
+    except KeyError:
+        return
 
     return parse_book_data(isbn=isbn, book_data=book_data)

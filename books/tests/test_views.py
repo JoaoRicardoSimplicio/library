@@ -226,6 +226,22 @@ class TestBookViewSet:
         assert 0 == Author.objects.count()
         mock_requests_get.assert_not_called()
 
+    @patch('books.services.requests.get')
+    def test_ingest_book_data_was_not_found_by_isbn(self, mock_requests_get, api_client):
+        url = reverse('book-ingest')
+
+        mock_requests_get.return_value.status_code = 200
+        mock_requests_get.return_value.json.return_value = {}
+
+        payload = {'isbn': '978-00000001'}
+
+        response = api_client.post(url, data=payload)
+
+        assert 404 == response.status_code
+        assert {'detail': 'Book data was not found.'} == response.json()
+        assert 0 == Book.objects.count()
+        assert 0 == Author.objects.count()
+        mock_requests_get.assert_called_once()
 
 @pytest.mark.django_db
 class TestAuthorViewSet:

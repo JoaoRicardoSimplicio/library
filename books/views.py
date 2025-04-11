@@ -22,6 +22,12 @@ class BookViewSet(viewsets.ModelViewSet):
 
         book_data = get_book_data_by_isbn(isbn=isbn)
 
+        if not book_data:
+            return Response(
+                {'detail': 'Book data was not found.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
         serializer = BookSerializer(data=book_data)
         serializer.is_valid(raise_exception=True)
         book = serializer.save()

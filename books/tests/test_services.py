@@ -71,3 +71,17 @@ class TestBookServices:
 
         assert expcted_data == book_data
         mock_requests_get.assert_called_once()
+
+    @patch('books.services.requests.get')
+    def test_book_data_was_not_found_by_isbn(self, mock_requests_get):
+        isbn = '978-00000001'
+        _isbn = f'ISBN:{isbn}'
+        mock_response = {}
+
+        mock_requests_get.return_value.status_code = 200
+        mock_requests_get.return_value.json.return_value = mock_response
+
+        book_data = get_book_data_by_isbn(isbn)
+
+        assert book_data is None
+        mock_requests_get.assert_called_once()
