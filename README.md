@@ -26,11 +26,29 @@ print(''.join(secrets.choice(string.ascii_letters + string.digits + string.punct
 
 ## Run application
 
+1. Build the app image
 ```bash
-docker compose up -d --build
+make build
+```
+
+2. Up the containers
+```bash
+make run
+```
+
+3. Apply migrations
+```bash
+make migrate
 ```
 
 ## API Usage
+
+1. Generates static files
+```
+make collectstatic
+```
+
+**NOTE**: It's a prerequisite to generate static files before access docs endpoint
 
 Access the endpoint `/docs` to get information about how to use the endpoints available in the Library API
 
