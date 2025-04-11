@@ -25,7 +25,7 @@ class TestBookViewSet:
         response = api_client.get(url)
 
         assert 200 == response.status_code
-        assert 3 == len(response.json())
+        assert 3 == response.json()['count']
 
     def test_create_book(self, api_client):
         payload = {
@@ -238,7 +238,7 @@ class TestAuthorViewSet:
         response = api_client.get(url)
 
         assert 200 == response.status_code
-        assert 3 == len(response.json())
+        assert 3 == response.json()['count']
 
     def test_create_author(self, api_client):
         payload = {'name': 'Robert C. Martin'}
