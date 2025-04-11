@@ -89,7 +89,7 @@ class TestBookSerializer(TestCase):
                         'Robert C. Martin',
                     ],
                     'description': '',
-                    'published_at': '2025-12-24'
+                    'published_at': None
                 }
             ],
             'results': {

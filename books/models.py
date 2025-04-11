@@ -15,7 +15,7 @@ class Book(models.Model):
     description = models.TextField(blank=True, null=True)
     isbn = models.CharField(unique=True, max_length=50, null=False)
     authors = models.ManyToManyField(Author, related_name='books')
-    published_at = models.DateField()
+    published_at = models.DateField(null=True)
 
     class Meta:
         ordering = ['title']
