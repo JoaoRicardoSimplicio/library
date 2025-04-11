@@ -36,3 +36,7 @@ class BookSerializer(serializers.ModelSerializer):
             authors: List[Book] = [Author.objects.get_or_create(name=name)[0] for name in authors_names]
             instance.authors.set(authors)
         return super().update(instance, validated_data)
+
+
+class BookISBNSerializer(serializers.Serializer):
+    isbn = serializers.CharField(help_text='isbn')

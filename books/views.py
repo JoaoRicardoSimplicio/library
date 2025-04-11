@@ -1,9 +1,10 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from books.models import Author, Book
-from books.serializers import AuthorSerializer, BookSerializer
+from books.serializers import AuthorSerializer, BookISBNSerializer, BookSerializer
 from books.services import get_book_data_by_isbn
 
 
@@ -11,6 +12,7 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+    @swagger_auto_schema(method='post', operation_description='Fetch book data based on ISBN ingestion', query_serializer=BookISBNSerializer)
     @action(detail=False, methods=['post'], url_path='ingest')
     def ingest(self, request):
         isbn = request.data.get('isbn')
